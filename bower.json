@@ -1,0 +1,13 @@
+{
+  "version": "0.0.0",
+  "name": "iamus",
+  "main": "app/index.html",
+  "ignore": [
+    "app"
+  ],
+  "dependencies": {
+    "angular": "angularjs#1.5.7",
+    "angular-soundmanager2": "^0.5.6"
+  },
+  "overrides": {}
+}
