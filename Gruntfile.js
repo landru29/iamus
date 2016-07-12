@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
         connect: {
             options: {
-                base: ['<%= project.build%>', '<%= project.app%>', __dirname],
+                base: ['./src', '<%= project.build%>', '<%= project.app%>', __dirname],
                 port: 9000,
                 open: true,
             },

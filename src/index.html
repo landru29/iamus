@@ -16,13 +16,17 @@
          <!-- build:js(.) scripts/vendor.min.js -->
          <!-- bower:js -->
          <script src="bower_components/angular/angular.js"></script>
-         <script src="bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
+         <script src="bower_components/angular-audio/app/angular.audio.js"></script>
+         <script src="bower_components/lodash/lodash.js"></script>
          <!-- endbower -->
          <!-- endbuild -->
 
          <!-- build:js(src) scripts/main.min.js -->
         <script src="app/app.js"></script>
         <script src="app/epiphanies/epiphanies.component.js"></script>
+        <script src="src/app/sound/sound.component.js"></script>
+        <script src="src/app/sound/sound.constant.js"></script>
+        <script src="src/app/sound/sound.service.js"></script>
          <!-- endbuild -->
 
         <base href="/">
