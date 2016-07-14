@@ -8,7 +8,8 @@
   "dependencies": {
     "angular-audio": "^1.7.2",
     "lodash": "^4.13.1",
-    "angular": "angularjs#^1.5.7"
+    "angular": "angularjs#^1.5.7",
+    "ngstorage": "^0.3.10"
   },
   "overrides": {},
   "resolutions": {

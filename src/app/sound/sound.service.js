@@ -1,18 +1,18 @@
-angular.module("application").service("Sound", function(ngAudio, $q) {
+angular.module("application").service("Sound", function (ngAudio, $q) {
     "use strict";
 
-    var Sound = function() {
+    var Sound = function () {
         this.data = [];
     };
 
-    Sound.prototype.load = function(name, url) {
+    Sound.prototype.load = function (name, url) {
         this.data.push({
             name: name,
             url: url
         });
     };
 
-    Sound.prototype.playAll = function(loop) {
+    Sound.prototype.playAll = function (loop) {
         var self = this;
         var _loop = false;
         if (_.isBoolean(loop)) {
@@ -21,7 +21,7 @@ angular.module("application").service("Sound", function(ngAudio, $q) {
         }
         var songs = arguments.length ? arguments[arguments.length - 1] : this.data;
         if (songs[0]) {
-            this.play(songs[0]).then(function() {
+            this.play(songs[0]).then(function () {
                 self.playAll(_loop, songs.slice(1));
             });
         } else {
@@ -33,7 +33,7 @@ angular.module("application").service("Sound", function(ngAudio, $q) {
         }
     };
 
-    Sound.prototype.play = function(name) {
+    Sound.prototype.play = function (name) {
         var self = this;
         return $q(function(resolve, reject) {
             var song = name.url ? name : _.find(self.data, {
@@ -42,7 +42,7 @@ angular.module("application").service("Sound", function(ngAudio, $q) {
             if (song) {
                 var stream = ngAudio.load(song.url);
                 self.currentPlaying = stream.play();
-                self.currentPlaying.complete(function() {
+                self.currentPlaying.complete(function () {
                     resolve();
                 });
             } else {

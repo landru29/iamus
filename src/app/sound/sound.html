@@ -1,1 +1,5 @@
-<div></div>
+<div>
+    <button data-ng-repeat="playlist in SoundCtrl.playlists track by playlist.name"
+            data-ng-bind="playlist.name">
+    </button>
+</div>

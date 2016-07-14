@@ -2,26 +2,26 @@
 /*global require, module,  __dirname */
 
 module.exports = function(grunt) {
-    'use strict';
+    "use strict";
 
-    var path = require('path');
+    var path = require("path");
 
     // Load Grunt tasks declared in the package.json file
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     var returnIndex = function(connect) {
-        return connect.static('index.html');
+        return connect.static("index.html");
     };
 
     var project = {
-        build: './build',
-        dist: './dist/public',
-        app: './src/app',
+        build: "./build",
+        dist: "./dist/public",
+        app: "./src/app",
         index: "./src/index.html",
-        bower: './bower_components'
+        bower: "./bower_components"
     };
 
-    var pkg = (require('./package.json'));
+    var pkg = (require("./package.json"));
 
     // Configure Grunt
     grunt.initConfig({
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
         connect: {
             options: {
-                base: ['./src', '<%= project.build%>', '<%= project.app%>', __dirname],
+                base: ["./src", "<%= project.build%>", "<%= project.app%>", __dirname],
                 port: 9000,
                 open: true,
             },
@@ -40,10 +40,11 @@ module.exports = function(grunt) {
 
         watch: {
             dev: {
-                files: ['<%= project.index%>', '<%= project.app%>/**/*.*'],
+                files: ["<%= project.index%>", "<%= project.app%>/**/*.*"],
                 tasks: [
-                    'jshint',
-                    'less'
+                    "jscs",
+                    "jshint",
+                    "less"
                 ],
                 options: {
                     livereload: true
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
             dist: {
                 options: {},
                 files: {
-                    '<%= project.build%>/styles/main.css': ['<%= project.app%>/**/*.less']
+                    "<%= project.build%>/styles/main.css": ["<%= project.app%>/**/*.less"]
                 }
             }
         },
@@ -64,42 +65,55 @@ module.exports = function(grunt) {
 
         jshint: {
             dev: [
-                '<%= project.app%>/**/*.js',
-                'Gruntfile.js'
+                "<%= project.app%>/**/*.js",
+                "Gruntfile.js"
             ]
+        },
+
+        jscs: {
+            dev: {
+                options: {
+                    config: ".jscsrc",
+                    fix: false, // Autofix code style violations when possible.
+                    requireCurlyBraces: ["if"]
+                },
+                files: {
+                    src: ["<%= project.app%>/**/*.js"]
+                }
+            },
         },
 
         wiredep: {
             app: {
-                src: ['<%= project.index%>'],
+                src: ["<%= project.index%>"],
                 ignorePath: /\.\.\//
             },
             style: {
-                src: ['<%= project.app%>/app.less']
+                src: ["<%= project.app%>/app.less"]
             },
         },
 
         clean: {
-            dist: ['<%= project.build%>', '<%= project.dist%>'],
-            dev: ['<%= project.build%>']
+            dist: ["<%= project.build%>", "<%= project.dist%>"],
+            dev: ["<%= project.build%>"]
         },
 
         filerev: {
             options: {
-                algorithm: 'md5',
+                algorithm: "md5",
                 length: 8
             },
             css: {
-                src: '<%= project.dist%>/styles/*.css'
+                src: "<%= project.dist%>/styles/*.css"
             },
             js: {
-                src: '<%= project.dist%>/scripts/*.js'
+                src: "<%= project.dist%>/scripts/*.js"
             }
         },
 
         concat: {
             generated: {
-                cwd: 'src'
+                cwd: "src"
             }
         },
 
@@ -108,42 +122,42 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     flatten: true,
-                    src: ['<%= project.index%>'],
-                    dest: '<%= project.dist%>/',
-                    filter: 'isFile'
+                    src: ["<%= project.index%>"],
+                    dest: "<%= project.dist%>/",
+                    filter: "isFile"
                 }, {
                     expand: true,
                     flatten: true,
-                    src: ['<%= project.app%>/favicon.ico'],
-                    dest: '<%= project.dist%>/',
-                    filter: 'isFile'
+                    src: ["<%= project.app%>/favicon.ico"],
+                    dest: "<%= project.dist%>/",
+                    filter: "isFile"
                 }]
             },
             dist: {
                 files: [{
                     expand: true,
                     flatten: false,
-                    cwd: '<%= project.build%>',
-                    src: ['fonts/**/*'],
-                    dest: '<%= project.dist%>/',
-                    filter: 'isFile'
+                    cwd: "<%= project.build%>",
+                    src: ["fonts/**/*"],
+                    dest: "<%= project.dist%>/",
+                    filter: "isFile"
                 }]
             }
         },
 
         useminPrepare: {
             html: {
-                src: ['<%= project.index%>']
+                src: ["<%= project.index%>"]
             },
             options: {
-                dest: '<%= project.dist%>',
-                staging: '<%= project.build%>',
-                root: 'src',
+                dest: "<%= project.dist%>",
+                staging: "<%= project.build%>",
+                root: "src",
                 flow: {
                     html: {
                         steps: {
-                            js: ['concat', 'uglifyjs'],
-                            css: ['cssmin']
+                            js: ["concat", "uglifyjs"],
+                            css: ["cssmin"]
                         },
                         post: {}
                     }
@@ -153,12 +167,12 @@ module.exports = function(grunt) {
 
         ngtemplates: {
             application: {
-                cwd: '<%= project.app%>',
-                src: '**/*.html',
-                dest: '<%= project.build%>/template.js',
+                cwd: "<%= project.app%>",
+                src: "**/*.html",
+                dest: "<%= project.build%>/template.js",
                 options: {
-                    //prefix: '/',
-                    usemin: '<%= project.dist%>/scripts/main.min.js',
+                    //prefix: "/",
+                    usemin: "<%= project.dist%>/scripts/main.min.js",
                     htmlmin: {
                         collapseBooleanAttributes: true,
                         collapseWhitespace: true,
@@ -180,51 +194,52 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    src: ['<%= project.build%>/concat/**/*.js']
+                    src: ["<%= project.build%>/concat/**/*.js"]
                 }]
             }
         },
 
         usemin: {
             html: [
-                '<%= project.dist%>/index.html'
+                "<%= project.dist%>/index.html"
             ],
             options: {
-                assetsDirs: ['<%= project.dist%>']
+                assetsDirs: ["<%= project.dist%>"]
             }
         }
 
     });
 
-    grunt.registerTask('serve', [
-        'clean:dev',
-        'wiredep:style',
-        'less',
-        'wiredep:app',
-        'connect',
-        'watch:dev'
+    grunt.registerTask("serve", [
+        "clean:dev",
+        "wiredep:style",
+        "less",
+        "wiredep:app",
+        "connect",
+        "watch:dev"
     ]);
 
 
-    grunt.registerTask('dist', [
-        'wiredep:app',
-        'wiredep:style',
-        'jshint:dev',
-        'clean:dist',
-        'copy:index',
-        'copy:dist',
-        'less',
-        'useminPrepare',
-        'ngtemplates:application',
-        'concat:generated',
-        'ngAnnotate',
-        'cssmin:generated',
-        'uglify:generated',
-        'filerev:js',
-        'filerev:css',
-        'usemin'
+    grunt.registerTask("dist", [
+        "wiredep:app",
+        "wiredep:style",
+        "jshint:dev",
+        "jscs:dev",
+        "clean:dist",
+        "copy:index",
+        "copy:dist",
+        "less",
+        "useminPrepare",
+        "ngtemplates:application",
+        "concat:generated",
+        "ngAnnotate",
+        "cssmin:generated",
+        "uglify:generated",
+        "filerev:js",
+        "filerev:css",
+        "usemin"
     ]);
 
-    grunt.registerTask('default', ['dist']);
+    grunt.registerTask("default", ["dist"]);
 
 };
