@@ -35,7 +35,7 @@ angular.module("application").service("Sound", function (ngAudio, $q) {
 
     Sound.prototype.play = function (name) {
         var self = this;
-        return $q(function(resolve, reject) {
+        return $q(function (resolve, reject) {
             var song = name.url ? name : _.find(self.data, {
                 name: name
             });

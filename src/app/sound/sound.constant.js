@@ -36,5 +36,5 @@ angular.module("application").constant("SOUND", [{
     }, {
         name: "Face aux montagnes du Soudan",
         url: "assets/sound02/2-2-face_aux_montagnes_du_soudan.mp3"
-    }, ]
+    }]
 }]);

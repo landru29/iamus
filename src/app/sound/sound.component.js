@@ -16,7 +16,7 @@ angular.module("application").component("sound", {
         function init () {
             loadPlaylist();
 
-            _.forEach(SOUND[0].sounds, function(song) {
+            _.forEach(SOUND[0].sounds, function (song) {
                 Sound.load(song.name, song.url);
             });
 
