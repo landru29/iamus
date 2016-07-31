@@ -1,0 +1,20 @@
+<div class="story">
+    <div data-ng-bind-html="StoryCtrl.currentPage"
+         class="story-content">
+    </div>
+    <div class="pager">
+        <button type="button"
+                data-ng-click="StoryCtrl.previous()"
+                class="btn btn-link">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <span data-ng-bind="StoryCtrl.page+1"></span>
+        <span>/</span>
+        <span data-ng-bind="StoryCtrl.story.length"></span>
+        <button type="button"
+                data-ng-click="StoryCtrl.next()"
+                class="btn btn-link">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

@@ -133,6 +133,23 @@ module.exports = function(grunt) {
                     filter: "isFile"
                 }]
             },
+            fonts: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    cwd: "<%= project.bower%>/font-awesome",
+                    src: ["fonts/*"],
+                    dest: "<%= project.build%>/fonts",
+                    filter: "isFile"
+                },{
+                    expand: true,
+                    flatten: true,
+                    cwd: ".",
+                    src: ["fonts/*"],
+                    dest: "<%= project.build%>/fonts",
+                    filter: "isFile"
+                }]
+            },
             dist: {
                 files: [{
                     expand: true,
@@ -213,6 +230,7 @@ module.exports = function(grunt) {
     grunt.registerTask("serve", [
         "clean:dev",
         "wiredep:style",
+        "copy:fonts",
         "less",
         "wiredep:app",
         "connect",
@@ -223,6 +241,7 @@ module.exports = function(grunt) {
     grunt.registerTask("dist", [
         "wiredep:app",
         "wiredep:style",
+        "copy:fonts",
         "jshint:dev",
         "jscs:dev",
         "clean:dist",
